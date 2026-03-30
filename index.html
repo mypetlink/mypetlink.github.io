@@ -4,6 +4,50 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Rockey ID Tag</title>
+
+  <!--
+    =====================================================================
+    BEGINNER EDIT GUIDE — READ THIS FIRST
+    =====================================================================
+
+    THIS FILE IS MADE TO BE REUSED FOR ANY PET.
+
+    MOST COMMON THINGS YOU WILL EDIT:
+    1) Pet name
+    2) Top contact name and phone
+    3) CALL / TEXT button phone number
+    4) Pet photos
+    5) Trait boxes
+    6) Status / lost information / behavior / vet / contacts
+    7) Facebook share link
+    8) Public website link
+    9) Image file names
+
+    IMPORTANT:
+    - Keep all quote marks " "
+    - Keep all < > brackets
+    - Only replace the text BETWEEN tags unless a comment says otherwise
+    - If you change an image file name here, the real image file must also match it
+    - Phone links should use digits only in the href when possible
+
+    EXAMPLE:
+    Visible text can look like: 1-716-909-5757
+    But the clickable link can look like: sms:+17169095757
+
+    ROCKEY'S LIVE PAGE RIGHT NOW:
+    https://mypetlink.github.io/rockey/
+
+    IF SOMEONE MAKES THEIR OWN PAGE LATER:
+    They need to replace Rockey's live page URL in 2 places:
+    1) The FACEBOOK share button link
+    2) The plain website link shown under it
+
+    EXAMPLE FUTURE URL:
+    https://yourusername.github.io/your-pet-page/
+
+    =====================================================================
+  -->
+
   <style>
     :root {
       --bg-1: #05070c;
@@ -147,6 +191,7 @@
       text-transform: uppercase;
       color: #f8fbff;
       text-shadow: 0 0 20px rgba(255,255,255,.08);
+      text-align: center;
     }
 
     .top-row {
@@ -155,6 +200,7 @@
       justify-content: center;
       gap: 14px;
       flex-wrap: wrap;
+      margin-bottom: 12px;
     }
 
     .primary-contact {
@@ -165,11 +211,20 @@
       color: var(--text);
       font-weight: 700;
       letter-spacing: .2px;
+      text-align: center;
+      flex-wrap: wrap;
+      justify-content: center;
     }
 
     .primary-contact .label {
       color: var(--muted);
       font-weight: 600;
+    }
+
+    .top-actions {
+      display: flex;
+      justify-content: center;
+      width: 100%;
     }
 
     .btn {
@@ -201,14 +256,6 @@
       box-shadow: 0 14px 30px rgba(27, 98, 255, .28), inset 0 1px 0 rgba(255,255,255,.18);
     }
 
-    .btn-secondary {
-      min-height: 52px;
-      padding: 0 20px;
-      background: linear-gradient(180deg, #1b2232, #101725);
-      border: 1px solid rgba(168, 208, 255, .16);
-      color: #f2f6ff;
-    }
-
     .btn-facebook {
       display: block;
       width: 100%;
@@ -229,6 +276,7 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 10px;
       margin-top: 18px;
+      align-items: stretch;
     }
 
     .photo {
@@ -261,6 +309,7 @@
       background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
       border: 1px solid rgba(173,216,255,.12);
       box-shadow: inset 0 0 0 1px rgba(255,255,255,.02);
+      min-width: 0;
     }
 
     .trait-chip .k {
@@ -279,6 +328,7 @@
       font-weight: 700;
       color: #f3f7ff;
       line-height: 1.35;
+      overflow-wrap: anywhere;
     }
 
     .section {
@@ -336,6 +386,7 @@
       color: var(--muted);
       line-height: 1.55;
       font-size: 1rem;
+      overflow-wrap: anywhere;
     }
 
     .field:last-child { border-bottom: 0; }
@@ -363,6 +414,7 @@
     .map-card {
       display: grid;
       gap: 14px;
+      min-width: 0;
     }
 
     .map-label {
@@ -385,6 +437,7 @@
       border: 1px solid rgba(173,216,255,.14);
       background: #0d1523;
       box-shadow: var(--glow);
+      display: block;
     }
 
     .map-frame img {
@@ -394,15 +447,6 @@
       object-fit: cover;
     }
 
-    .button-row {
-      display: block;
-      margin-top: 14px;
-    }
-
-    .button-row .btn {
-      flex: 1 1 220px;
-    }
-
     .contacts-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -410,7 +454,6 @@
     }
 
     .contact-tile {
-      display: block;
       border-radius: 14px;
       padding: 12px 10px;
       background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
@@ -442,12 +485,14 @@
       color: var(--muted);
       font-size: .98rem;
       line-height: 1.45;
+      overflow-wrap: anywhere;
     }
 
     .contact-note {
       margin-top: 14px;
       color: var(--muted);
       line-height: 1.55;
+      overflow-wrap: anywhere;
     }
 
     .microcopy {
@@ -478,7 +523,7 @@
     }
 
     .vehicle-photo {
-      height: 260px;
+      min-height: 260px;
       border-radius: 16px;
       overflow: hidden;
       border: 1px solid rgba(173,216,255,.12);
@@ -499,15 +544,6 @@
       object-position: center;
     }
 
-    .vehicle-photo .caption {
-      padding: 10px 12px 12px;
-      color: var(--muted);
-      font-size: .9rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: .55px;
-    }
-
     .plain-link {
       display: block;
       margin-top: 12px;
@@ -519,78 +555,143 @@
 
     .plain-link:hover { text-decoration: underline; }
 
+    @media (max-width: 900px) {
+      .photo {
+        height: 360px;
+      }
+    }
+
     @media (max-width: 760px) {
-  .hero,
-  .section {
-    padding-left: 18px;
-    padding-right: 18px;
-  }
+      body {
+        padding: 14px 8px 30px;
+      }
 
-  .grid-2 {
-    grid-template-columns: 1fr;
-  }
+      .shell {
+        padding: 10px;
+        border-radius: 24px;
+      }
 
-  .pet-name {
-    font-size: 2.5rem;
-  }
+      .frame-corners {
+        inset: 10px;
+      }
 
-  .primary-contact {
-    font-size: 1rem;
-  }
+      .corner {
+        width: 64px;
+        height: 64px;
+      }
 
-  .button-row .btn {
-    width: 100%;
-  }
+      .hero,
+      .section {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
 
-  /* DOG PHOTOS: horizontal scroll, full images */
-  .photo-strip {
-    display: flex;
-    gap: 12px;
-    overflow-x: auto;
-    padding-bottom: 4px;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-  }
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
 
-  .photo-strip::-webkit-scrollbar {
-    height: 8px;
-  }
+      .pet-name {
+        font-size: 2.3rem;
+        line-height: 1;
+      }
 
-  .photo-strip::-webkit-scrollbar-thumb {
-    background: rgba(255,255,255,.18);
-    border-radius: 999px;
-  }
+      .title-bar {
+        gap: 10px;
+        margin-bottom: 14px;
+      }
 
-  .photo {
-    flex: 0 0 78%;
-    height: auto;
-    scroll-snap-align: start;
-  }
+      .title-bar .line {
+        max-width: 56px;
+      }
 
-  .photo img {
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-    object-position: center;
-    display: block;
-  }
+      .primary-contact {
+        font-size: 1rem;
+        gap: 6px;
+      }
 
-  /* TOP TRAITS: clean 2-column layout */
-  .traits-strip {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px;
-  }
+      .top-actions .btn {
+        width: 100%;
+      }
 
-  /* VEHICLES + CONTACTS stay readable */
-  .vehicle-photo-grid,
-  .contacts-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+      .photo-strip {
+        display: flex;
+        gap: 12px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding-bottom: 6px;
+        margin-left: -2px;
+        margin-right: -2px;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+      }
 
-  .vehicle-photo {
-    height: 200px;
-  }
-}
+      .photo-strip::-webkit-scrollbar {
+        height: 8px;
+      }
+
+      .photo-strip::-webkit-scrollbar-thumb {
+        background: rgba(255,255,255,.18);
+        border-radius: 999px;
+      }
+
+      .photo {
+        flex: 0 0 82%;
+        height: auto;
+        aspect-ratio: 4 / 5;
+        scroll-snap-align: start;
+      }
+
+      .photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+      }
+
+      .traits-strip {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .trait-chip {
+        min-height: 88px;
+      }
+
+      .vehicle-photo-grid,
+      .contacts-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .vehicle-photo {
+        min-height: 180px;
+      }
+
+      .bar {
+        font-size: .85rem;
+        letter-spacing: .5px;
+        padding: 11px 13px;
+      }
+
+      .panel {
+        padding: 15px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .vehicle-photo-grid,
+      .contacts-grid,
+      .traits-strip {
+        grid-template-columns: 1fr;
+      }
+
+      .photo {
+        flex-basis: 88%;
+      }
+
+      .contact-tile {
+        min-height: 94px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -603,28 +704,44 @@
     </div>
 
     <main class="page">
-      <!-- 🔴🔴🔴 TOP SECTION — DO NOT CHANGE ORDER 🔴🔴🔴 -->
-      <!-- 🔴 EDIT PET NAME BELOW 🔴 -->
-      <!-- 🔴 EDIT PRIMARY CONTACT NAME + NUMBER BELOW 🔴 -->
-      <!-- 🔴 KEEP CALL / TEXT BUTTON HERE AT TOP 🔴 -->
-      <!-- 🔴 REPLACE THE 3 IMAGE FILE NAMES BELOW WITH YOUR PET IMAGES IF NEEDED 🔴 -->
+
+      <!-- =========================================================
+           TOP HERO SECTION
+           ========================================================= -->
       <section class="hero">
         <div class="title-bar">
           <span class="line"></span>
+
+          <!-- EDIT PET NAME HERE -->
           <h1 class="pet-name" data-pet-name>ROCKEY</h1>
+
           <span class="line"></span>
         </div>
 
         <div class="top-row">
           <div class="primary-contact">
+            <!-- EDIT TOP CONTACT NAME HERE -->
             <span class="label">Maria</span>
+
+            <!-- EDIT TOP CONTACT DISPLAY NUMBER HERE -->
             <span>— 1-716-909-5757</span>
           </div>
+        </div>
 
-          <a class="btn btn-primary" href="sms:17169095757">CALL / TEXT</a>
+        <div class="top-actions">
+          <!--
+            ONE TOP BUTTON
+            EDIT PHONE NUMBER ONLY
+            If someone wants their own number later, replace only the number below
+          -->
+          <a class="btn btn-primary" href="sms:+17169095757">CALL / TEXT</a>
         </div>
 
         <div class="photo-strip">
+          <!--
+            EDIT PET PHOTO FILE NAMES HERE
+            If someone uses their own images later, replace the file names below
+          -->
           <div class="photo"><img src="pet-1.jpg" alt="Pet photo 1"></div>
           <div class="photo"><img src="pet-2.jpg" alt="Pet photo 2"></div>
           <div class="photo"><img src="pet-3.jpg" alt="Pet photo 3"></div>
@@ -639,9 +756,6 @@
         </div>
       </section>
 
-      <!-- 🔴🔴🔴 IF YOU HAVE PET SECTION 🔴🔴🔴 -->
-      <!-- 🔴 KEEP BULLETS SHORT + DIRECT 🔴 -->
-      <!-- 🔴 REPLACE ROCKEY-SPECIFIC WORDING IF USING FOR ANOTHER PET 🔴 -->
       <section class="section">
         <div class="bar">IF YOU HAVE ROCKEY</div>
         <div class="panel">
@@ -649,44 +763,34 @@
             <li>Please call or text immediately</li>
             <li>She is friendly and loved</li>
             <li>Please keep her secure</li>
-            <li>She is kennel trained (all of these bullets are of course editable as is all answers to all questions in this code)</li>
+            <li>She is kennel trained</li>
           </ul>
         </div>
       </section>
 
-      <!-- 🔴🔴🔴 STATUS SECTION 🔴🔴🔴 -->
-      <!-- 🔴 ALWAYS KEEP THIS SECTION IN THIS ORDER 🔴 -->
-      <!-- 🔴 UPDATE LAST UPDATED FIRST 🔴 -->
-      <!-- 🔴 THEN UPDATE CURRENT STATUS 🔴 -->
-      <!-- 🔴 THEN UPDATE IMPORTANT NOTES 🔴 -->
       <section class="section">
         <div class="bar">MOST RECENT STATUS AS OF LAST UPDATE</div>
         <div class="panel stack">
           <div class="field"><strong>Last Updated:</strong> [ENTER DATE &amp; TIME]</div>
-          <div class="field"><strong>Current Status:</strong> [ie: home, Camping with family at ___ / Local to home in Western New York / Traveling / Other]</div>
-          <div class="field"><strong>Important Notes:</strong> [Leave blank if none OR add important real-time info such as being on a hikes, areas, movement]</div>
+          <div class="field"><strong>Current Status:</strong> [ie: home, camping with family at ___ / local to home in Western New York / traveling / other]</div>
+          <div class="field"><strong>Important Notes:</strong> [Leave blank if none OR add important real-time info such as hikes, areas, or movement]</div>
         </div>
       </section>
 
-      <!-- 🔴🔴🔴 IF YOU SEE PET LOOSE BUT DO NOT HAVE HER 🔴🔴🔴 -->
-      <!-- 🔴 KEEP THIS PRACTICAL + FAST TO READ 🔴 -->
       <section class="section">
         <div class="bar">IF YOU SEE ROCKEY LOOSE BUT DO NOT HAVE HER</div>
         <div class="panel">
           <ul class="tight-list">
             <li>Please call or text immediately</li>
             <li>Please send a photo or video if possible</li>
-            <li>Please send exact location, if possible, include latitude and longitude (can be found using Google Maps)</li>
+            <li>Please send exact location — if possible include latitude and longitude from Google Maps</li>
             <li>Let us know direction of travel if seen moving</li>
-            <li>If safe, you may follow from a far distance, DO NOT APPROACH- you will spoke her.</li>
+            <li>If safe, you may follow from a far distance — do not approach; you may spook her</li>
           </ul>
           <p class="microcopy">Even brief sightings help us locate her.</p>
         </div>
       </section>
 
-      <!-- 🔴🔴🔴 LOST MODE SECTION — ONLY USE WHEN NEEDED 🔴🔴🔴 -->
-      <!-- 🔴 UPDATE ALL LAST SIGHTING DETAILS HERE 🔴 -->
-      <!-- 🔴 REPLACE MAP-PREVIEW IMAGE + GOOGLE MAPS LINK WHEN NEEDED 🔴 -->
       <section class="section">
         <div class="bar">IF LOST — LAST CONFIRMED SIGHTING</div>
         <div class="grid-2">
@@ -709,21 +813,17 @@
         </div>
       </section>
 
-      <!-- 🔴🔴🔴 ACTIVE SEARCH / GROUP SECTION 🔴🔴🔴 -->
-      <!-- 🔴 LEAVE EMPTY OR FILL IN IF A SEARCH GROUP IS HELPING 🔴 -->
       <section class="section">
         <div class="bar bar-neutral">ACTIVE SEARCH / GROUP (IF APPLICABLE)</div>
         <div class="panel stack">
           <div class="field"><strong>Search Group Name:</strong> [Enter]</div>
           <div class="field"><strong>Contact Name:</strong> [Enter]</div>
           <div class="field"><strong>Contact Phone:</strong> [Enter]</div>
-          <div class="field"><strong>If anyone has more current information than what s shown here:</strong><br>• Please contact us immediately<br>• If we are unreachable, contact the search group listed above</div>
+          <div class="field"><strong>If anyone has more current information than what is shown here:</strong><br>• Please contact us immediately<br>• If we are unreachable, contact the search group listed above</div>
           <div class="field"><strong>DO NOT CHASE OR APPROACH ROCKEY</strong></div>
         </div>
       </section>
 
-      <!-- 🔴🔴🔴 BEHAVIOR & HANDLING SECTION 🔴🔴🔴 -->
-      <!-- 🔴 KEEP ROCKEY'S EXACT INFO HERE UNLESS CHANGING PETS 🔴 -->
       <section class="section">
         <div class="bar">BEHAVIOR &amp; HANDLING</div>
         <div class="grid-2">
@@ -747,7 +847,7 @@
 
           <div class="stack">
             <div class="panel">
-              <h3 class="section-title">Additional Traits</h3>
+              <h3 class="section-title">Key Details</h3>
               <ul class="tight-list">
                 <li>Indoor dog</li>
                 <li>Never spends time outside unsupervised</li>
@@ -757,7 +857,7 @@
             </div>
 
             <div class="panel">
-              <h3 class="section-title">Commands</h3>
+              <h3 class="section-title">Verbal Commands</h3>
               <ul class="tight-list">
                 <li>Sit</li>
                 <li>Stay</li>
@@ -787,7 +887,6 @@
         </div>
       </section>
 
-      <!-- 🔴🔴🔴 FOOD / LURE INFORMATION SECTION 🔴🔴🔴 -->
       <section class="section">
         <div class="bar">FOOD / LURE INFORMATION</div>
         <div class="panel grid-2">
@@ -813,7 +912,6 @@
         </div>
       </section>
 
-      <!-- 🔴🔴🔴 IDENTIFICATION DETAILS SECTION 🔴🔴🔴 -->
       <section class="section">
         <div class="bar">IDENTIFICATION DETAILS</div>
         <div class="panel stack">
@@ -826,7 +924,6 @@
         </div>
       </section>
 
-      <!-- 🔴🔴🔴 HOME / REGION SECTION 🔴🔴🔴 -->
       <section class="section">
         <div class="bar bar-neutral">HOME / REGION</div>
         <div class="panel stack">
@@ -835,7 +932,6 @@
         </div>
       </section>
 
-      <!-- 🔴🔴🔴 TRAVEL / CAMPING INFORMATION SECTION 🔴🔴🔴 -->
       <section class="section">
         <div class="bar">TRAVEL / CAMPING INFORMATION</div>
         <div class="panel stack">
@@ -852,8 +948,6 @@
         </div>
       </section>
 
-      <!-- 🔴🔴🔴 VEHICLE & CAMPER IDENTIFICATION SECTION 🔴🔴🔴 -->
-      <!-- 🔴 REPLACE VEHICLE IMAGE FILE NAMES ONLY IF YOUR FILE NAMES CHANGE 🔴 -->
       <section class="section">
         <div class="bar">VEHICLE &amp; CAMPER IDENTIFICATION</div>
         <div class="grid-2">
@@ -877,6 +971,7 @@
             </ul>
           </div>
         </div>
+
         <div class="vehicle-photo-grid">
           <div class="vehicle-photo">
             <img src="camper-1.jpg" alt="Camper photo">
@@ -887,7 +982,6 @@
         </div>
       </section>
 
-      <!-- 🔴🔴🔴 VETERINARY / MEDICAL SECTION 🔴🔴🔴 -->
       <section class="section">
         <div class="bar">VETERINARY / MEDICAL</div>
         <div class="grid-2">
@@ -904,7 +998,6 @@
         </div>
       </section>
 
-      <!-- 🔴🔴🔴 EMERGENCY CARE CONSENT SECTION 🔴🔴🔴 -->
       <section class="section">
         <div class="bar">EMERGENCY CARE CONSENT</div>
         <div class="panel">
@@ -917,56 +1010,72 @@
         </div>
       </section>
 
-      <!-- 🔴🔴🔴 LOST PATTERN SECTION 🔴🔴🔴 -->
       <section class="section">
-        <div class="bar">LOST PATTERN (REUSABLE SECTION)</div>
+        <div class="bar">LOST HISTORY / PATTERNS</div>
         <div class="panel stack">
-          <div class="field"><strong>PREVIOUS LOST / SIGHTING PATTERN</strong><br>[Leave blank for now]</div>
+          <div class="field"><strong>Previous number of times lost:</strong><br>[Leave blank for now]</div>
           <div class="field"><strong>Lost &amp; Found History:</strong><br>• Date lost<br>• Sightings while lost<br>• Location found<br>• Date found<br>• Notes / behavior pattern while lost: [hid, walked far away, forest, etc.]</div>
         </div>
       </section>
 
-      <!-- 🔴🔴🔴 SHARE THIS SITE SECTION — ONLY USED WHEN LOST 🔴🔴🔴 -->
-      <!-- 🔴 ADD ACTUAL FACEBOOK SHARE LINK TO BUTTON BELOW WHEN READY 🔴 -->
-      <!-- 🔴 ADD ACTUAL PAGE URL BELOW WHEN READY 🔴 -->
       <section class="section">
         <div class="bar">SHARE THIS SITE (ONLY USED WHEN LOST)</div>
         <div class="panel stack">
-          <div class="field"><strong>HELP FIND <span data-pet-name>ROCKEY</span> BY SHARING THIS SITE.</strong><br>FULL DETAILS AND LIVE UPDATES:</div>
+          <div class="field"><strong>PLEASE HELP <span data-pet-name>ROCKEY</span> BY SHARING THIS SITE ON YOUR PERSONAL SOCIAL MEDIA AND ANY/ALL LOCAL TO THE AREA LOST PET GROUPS.</strong><br>FULL DETAILS AND LIVE UPDATES:</div>
+
+          <!--
+            FACEBOOK SHARE BUTTON
+            ROCKEY'S LIVE PAGE IS ALREADY FILLED IN BELOW.
+
+            IF SOMEONE MAKES THEIR OWN PAGE LATER:
+            replace ONLY the URL after u=
+            CURRENT ROCKEY URL:
+            https://mypetlink.github.io/rockey/
+          -->
           <a class="btn btn-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://mypetlink.github.io/rockey/" target="_blank" rel="noopener">FACEBOOK</a>
+
+          <!--
+            PUBLIC WEBSITE LINK
+            ROCKEY'S LIVE PAGE IS ALREADY FILLED IN BELOW.
+
+            IF SOMEONE MAKES THEIR OWN PAGE LATER:
+            replace the full URL below with their own live page URL
+          -->
           <a class="plain-link" href="https://mypetlink.github.io/rockey/" target="_blank" rel="noopener">https://mypetlink.github.io/rockey/</a>
-          <div class="contact-note">Share the link on any social media platforms, in text or emails to help spread the search for Rockey.</div>
+
+          <div class="contact-note">Share the link with friends, family, neighbors: think Nextdoor App, text, email, local authorities.</div>
           <div class="field"><strong>Suggested post text (copy):</strong><br>Missing dog: <span data-pet-name>ROCKEY</span><br>Female, grey, 45 lbs<br>Friendly but scared — do not chase<br>Call/Text: 1-716-909-5757</div>
         </div>
       </section>
 
-      <!-- 🔴🔴🔴 FULL CONTACTS LOWER ON PAGE 🔴🔴🔴 -->
-      <!-- 🔴 KEEP MAIN TOP CONTACT AT TOP OF PAGE 🔴 -->
-      <!-- 🔴 USE THIS LOWER SECTION FOR OTHER NUMBERS 🔴 -->
       <section class="section">
         <div class="bar bar-neutral">CONTACTS — CALL / TEXT</div>
         <div class="contacts-grid">
-          <a class="contact-tile" href="sms:17169095757">
+          <a class="contact-tile" href="sms:+17169095757">
             <div class="who">1st Contact</div>
             <div class="num">Maria<br>1-716-909-5757</div>
           </a>
-          <a class="contact-tile" href="sms:17164654100">
+
+          <a class="contact-tile" href="sms:+17164654100">
             <div class="who">2nd Contact</div>
             <div class="num">Lisa<br>1-716-465-4100</div>
           </a>
-          <a class="contact-tile" href="sms:17169014782">
+
+          <a class="contact-tile" href="sms:+17169014782">
             <div class="who">3rd Contact</div>
             <div class="num">Sheri<br>1-716-901-4782</div>
           </a>
-          <a class="contact-tile" href="sms:17169091961">
+
+          <a class="contact-tile" href="sms:+17169091961">
             <div class="who">4th Contact</div>
             <div class="num">Sue<br>1-716-909-1961</div>
           </a>
         </div>
+
         <div class="contact-note">Email: mariaalesse@gmail.com</div>
+        <div class="contact-note">We give consent to share any of this information in the hopes it helps reunite Rockey with her family.</div>
       </section>
 
-      <!-- 🔴🔴🔴 THANK YOU SECTION 🔴🔴🔴 -->
       <section class="section">
         <div class="bar">THANK YOU</div>
         <div class="panel footer-note">
@@ -977,10 +1086,11 @@
       </section>
     </main>
   </div>
+
   <script>
     (function () {
       const petName = document.querySelector('[data-pet-name]')?.textContent?.trim() || 'PET NAME';
-      document.querySelectorAll('[data-pet-name]').forEach(el => {
+      document.querySelectorAll('[data-pet-name]').forEach((el) => {
         el.textContent = petName;
       });
     })();
