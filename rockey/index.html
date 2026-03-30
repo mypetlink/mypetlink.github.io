@@ -34,11 +34,11 @@
     10) Camper / truck images
 
     IMAGE FILE NAMES CURRENTLY USED IN THIS CODE:
-    - pet-1.png
-    - pet-2.png
-    - pet-3.png
-    - camper-1.png
-    - truck-1.png
+    - pet-1.jpg
+    - pet-2.jpg
+    - pet-3.jpg
+    - camper-1.jpg
+    - truck-1.jpg
 
     IF SOMEONE MAKES THEIR OWN PET PAGE LATER:
     Replace Rockey's live URL in these 2 places:
@@ -55,24 +55,22 @@
     :root {
       --bg-1: #05070c;
       --bg-2: #0a1120;
-      --panel: #0e1728;
-      --panel-2: #111d31;
-      --line: rgba(173, 216, 255, 0.18);
       --text: #eef4ff;
       --muted: #b9c7df;
       --blue: #2e74ff;
       --blue-2: #68a8ff;
       --red: #d71423;
       --red-2: #ff3848;
-      --purple-1: #8c8cff;
-      --purple-2: #5e62d9;
-      --silver-1: #f1f5fb;
-      --silver-2: #93a4be;
-      --silver-3: #4d5d77;
+      --purple-1: #a7a2ff;
+      --purple-2: #757ae8;
+
+      /* new contact button color family so it does not blend with existing page colors */
+      --contact-1: #1dbb9e;
+      --contact-2: #0d8f79;
+      --contact-3: #075f54;
+      --contact-line: rgba(149, 255, 231, 0.34);
+
       --glow: 0 0 0 1px rgba(117, 170, 255, 0.16), 0 0 28px rgba(53, 112, 255, 0.18);
-      --radius-xl: 28px;
-      --radius-lg: 18px;
-      --radius-md: 14px;
       --shadow: 0 20px 50px rgba(0,0,0,.45);
     }
 
@@ -291,21 +289,7 @@
     .photo-wrap {
       margin-top: 18px;
       position: relative;
-    }
-
-    .photo-hint {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      margin-bottom: 10px;
-      color: #cdddff;
-      font-size: .88rem;
-      font-weight: 800;
-      letter-spacing: .4px;
-      text-transform: uppercase;
-      text-align: center;
-      opacity: .92;
+      overflow: hidden;
     }
 
     .photo-strip {
@@ -400,8 +384,8 @@
     }
 
     .bar-neutral {
-      background: linear-gradient(180deg, #9b9cff, #6f73ea);
-      box-shadow: 0 16px 30px rgba(111, 115, 234, .24), inset 0 1px 0 rgba(255,255,255,.14);
+      background: linear-gradient(180deg, var(--purple-1), var(--purple-2));
+      box-shadow: 0 16px 30px rgba(117, 122, 232, .24), inset 0 1px 0 rgba(255,255,255,.14);
     }
 
     .panel {
@@ -409,7 +393,7 @@
       border: 1px solid rgba(173,216,255,.12);
       border-radius: 18px;
       padding: 18px;
-      box-shadow: var(--glow);
+      box-shadow: 0 0 0 1px rgba(117, 170, 255, 0.16), 0 0 28px rgba(53, 112, 255, 0.18);
     }
 
     .grid-2 {
@@ -482,16 +466,9 @@
       border-radius: 18px;
       border: 1px solid rgba(173,216,255,.14);
       background: #0d1523;
-      box-shadow: var(--glow);
+      box-shadow: 0 0 0 1px rgba(117, 170, 255, 0.16), 0 0 28px rgba(53, 112, 255, 0.18);
       display: block;
       text-decoration: none;
-    }
-
-    .map-frame img {
-      width: 100%;
-      display: block;
-      aspect-ratio: 16 / 8.2;
-      object-fit: cover;
     }
 
     .map-placeholder {
@@ -499,11 +476,11 @@
       align-items: center;
       justify-content: center;
       min-height: 230px;
-      padding: 20px;
+      padding: 24px;
       text-align: center;
       color: #d6e4ff;
       font-weight: 800;
-      line-height: 1.5;
+      line-height: 1.55;
       background:
         linear-gradient(180deg, rgba(15, 26, 48, .96), rgba(9, 17, 31, .98));
     }
@@ -515,10 +492,9 @@
     }
 
     .contact-tile {
+      position: relative;
       border-radius: 14px;
       padding: 12px 10px;
-      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
-      border: 1px solid rgba(173,216,255,.14);
       text-decoration: none;
       color: inherit;
       min-height: 108px;
@@ -527,26 +503,77 @@
       justify-content: center;
       align-items: center;
       text-align: center;
-      box-shadow: var(--glow);
-      transition: transform .18s ease, filter .18s ease;
+
+      /* same exact shape/size, stronger 3D button look */
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.24) 0%, rgba(255,255,255,.06) 16%, transparent 17%),
+        linear-gradient(180deg, var(--contact-1), var(--contact-2) 58%, var(--contact-3));
+      border: 1px solid var(--contact-line);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.34),
+        inset 0 -2px 0 rgba(0,0,0,.26),
+        0 14px 26px rgba(4, 48, 43, .34),
+        0 0 0 1px rgba(16, 162, 139, .16);
+      transition: transform .16s ease, box-shadow .16s ease, filter .16s ease;
+      cursor: pointer;
     }
 
-    .contact-tile:hover {
+    .contact-tile::before {
+      content: "";
+      position: absolute;
+      inset: 6px 6px auto 6px;
+      height: 34%;
+      border-radius: 10px;
+      background: linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,0));
+      pointer-events: none;
+    }
+
+    .contact-tile::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 14px;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.05);
+      pointer-events: none;
+    }
+
+    .contact-tile:hover,
+    .contact-tile:focus-visible {
       transform: translateY(-2px);
       filter: brightness(1.05);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.38),
+        inset 0 -2px 0 rgba(0,0,0,.28),
+        0 18px 32px rgba(4, 48, 43, .40),
+        0 0 16px rgba(29, 187, 158, .18);
+      outline: none;
+    }
+
+    .contact-tile:active {
+      transform: translateY(1px);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.20),
+        inset 0 -1px 0 rgba(0,0,0,.18),
+        0 8px 18px rgba(4, 48, 43, .30);
     }
 
     .contact-tile .who {
-      color: #f3f7ff;
-      font-weight: 800;
+      position: relative;
+      z-index: 1;
+      color: #f7fffd;
+      font-weight: 900;
       margin-bottom: 6px;
+      text-shadow: 0 1px 0 rgba(0,0,0,.18);
     }
 
     .contact-tile .num {
-      color: var(--muted);
+      position: relative;
+      z-index: 1;
+      color: #e8fffb;
       font-size: .98rem;
       line-height: 1.45;
       overflow-wrap: anywhere;
+      text-shadow: 0 1px 0 rgba(0,0,0,.14);
     }
 
     .contact-note {
@@ -589,7 +616,7 @@
       overflow: hidden;
       border: 1px solid rgba(173,216,255,.12);
       background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
-      box-shadow: var(--glow);
+      box-shadow: 0 0 0 1px rgba(117, 170, 255, 0.16), 0 0 28px rgba(53, 112, 255, 0.18);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -606,14 +633,6 @@
       object-position: center;
       border-radius: 12px;
       background: rgba(5, 10, 22, .55);
-    }
-
-    .copy-status {
-      margin-top: 10px;
-      color: #d9e8ff;
-      font-weight: 700;
-      text-align: center;
-      min-height: 22px;
     }
 
     @media (max-width: 900px) {
@@ -674,10 +693,6 @@
         width: 100%;
       }
 
-      .photo-wrap {
-        overflow: hidden;
-      }
-
       .photo-strip {
         display: flex;
         gap: 12px;
@@ -714,11 +729,12 @@
         object-position: center;
       }
 
+      /* keep blue hover arrow on mobile only */
       .photo-wrap::after {
         content: "›";
         position: absolute;
         right: 8px;
-        top: 58%;
+        top: 53%;
         transform: translateY(-50%);
         width: 38px;
         height: 38px;
@@ -797,7 +813,6 @@
 
     <main class="page">
 
-      <!-- TOP HERO SECTION -->
       <section class="hero">
         <div class="title-bar">
           <span class="line"></span>
@@ -813,18 +828,10 @@
         </div>
 
         <div class="top-actions">
-          <!-- EDIT PHONE NUMBER ONLY -->
           <a class="btn btn-primary" href="sms:+17169095757">CALL / TEXT</a>
         </div>
 
         <div class="photo-wrap">
-          <div class="photo-hint">Swipe for more photos →</div>
-
-          <!--
-            PET IMAGE FILES
-            These names match the files shown in your repo.
-            If someone swaps images later, they must change the file names here too.
-          -->
           <div class="photo-strip">
             <div class="photo"><img src="pet-1.jpg" alt="Pet photo 1"></div>
             <div class="photo"><img src="pet-2.jpg" alt="Pet photo 2"></div>
@@ -857,8 +864,8 @@
         <div class="bar">MOST RECENT STATUS AS OF LAST UPDATE</div>
         <div class="panel stack">
           <div class="field"><strong>Last Updated:</strong> [ENTER DATE &amp; TIME]</div>
-          <div class="field"><strong>Current Status:</strong> [ie: home, camping with family see below / traveling / other]</div>
-          <div class="field"><strong>Important Notes:</strong> [recent illness or surgeries,real-time info such as location of current hike, kenneling, etc]</div>
+          <div class="field"><strong>Current Status:</strong> [ie: home, camping with family at ___ / local to home in Western New York / traveling / other]</div>
+          <div class="field"><strong>Important Notes:</strong> [Leave blank if none OR add important real-time info such as hikes, areas, or movement]</div>
         </div>
       </section>
 
@@ -891,24 +898,10 @@
           <div class="map-card">
             <span class="map-label">LAST SEEN LOCATION</span>
 
-            <!--
-              MAP LINK
-              Replace Google Maps URL here when you have a real last-seen map link.
-            -->
+            <!-- only the map frame is clickable -->
             <a class="map-frame" href="https://www.google.com/maps" target="_blank" rel="noopener" aria-label="Open last seen location in Google Maps">
-              <!--
-                If you add a real map image later, replace no-map with your image file name.
-                Example:
-                <img src="map-preview.png" alt="Last seen location map" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-              -->
-              <img
-                src="no-map"
-                alt="Last seen location map"
-                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-              >
-              <div class="map-placeholder" style="display:none;">
-                Add a map image later if needed.<br>
-                The location button above can still link to Google Maps.
+              <div class="map-placeholder">
+                Map link preview can be added as needed.
               </div>
             </a>
 
@@ -1127,12 +1120,9 @@
         <div class="panel stack">
           <div class="field"><strong>PLEASE HELP <span data-pet-name>ROCKEY</span> BY SHARING THIS SITE ON YOUR PERSONAL SOCIAL MEDIA AND ANY/ALL LOCAL TO THE AREA LOST PET GROUPS.</strong><br>FULL DETAILS AND LIVE UPDATES:</div>
 
-          <!-- EDIT ONLY THE URL AFTER u= IF SOMEONE MAKES THEIR OWN PAGE -->
           <a class="btn btn-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://mypetlink.github.io/rockey/" target="_blank" rel="noopener">FACEBOOK</a>
 
-          <!-- THIS BUTTON COPIES THE WEBSITE LINK FOR EASY PASTING -->
           <button class="btn btn-copy" id="copyWebsiteButton" type="button">COPY WEBSITE LINK</button>
-          <div class="copy-status" id="copyStatus"></div>
 
           <div class="contact-note">Share the link with friends, family, neighbors: think Nextdoor App, text, email, local authorities.</div>
           <div class="field"><strong>Suggested post text (copy):</strong><br>Missing dog: <span data-pet-name>ROCKEY</span><br>Female, grey, 45 lbs<br>Friendly but scared — do not chase<br>Call/Text: 1-716-909-5757</div>
@@ -1185,24 +1175,23 @@
         el.textContent = petName;
       });
 
-      /*
-        WEBSITE URL TO COPY
-        If someone makes their own page later,
-        replace the value below with their own live page URL.
-      */
       const WEBSITE_URL = 'https://mypetlink.github.io/rockey/';
-
       const copyButton = document.getElementById('copyWebsiteButton');
-      const copyStatus = document.getElementById('copyStatus');
 
       if (copyButton) {
         copyButton.addEventListener('click', async function () {
+          const originalText = copyButton.textContent;
+
           try {
             await navigator.clipboard.writeText(WEBSITE_URL);
-            copyStatus.textContent = 'Website link copied.';
           } catch (error) {
-            copyStatus.textContent = 'Copy failed. Long-press and copy the page URL from your browser.';
+            /* fall back silently */
           }
+
+          copyButton.textContent = 'LINK COPIED';
+          setTimeout(() => {
+            copyButton.textContent = originalText;
+          }, 1200);
         });
       }
     })();
