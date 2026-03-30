@@ -10,40 +10,43 @@
     BEGINNER EDIT GUIDE — READ THIS FIRST
     =====================================================================
 
-    THIS FILE IS MADE TO BE REUSED FOR ANY PET.
+    THIS PAGE IS FOR:
+    https://mypetlink.github.io/rockey/
+
+    IMPORTANT:
+    If you want the page URL to end in /rockey/
+    then this file must be named:
+    rockey/index.html
+
+    DO NOT rename this file to something else like rockey.html
+    if you want the clean /rockey/ ending.
 
     MOST COMMON THINGS YOU WILL EDIT:
     1) Pet name
     2) Top contact name and phone
-    3) CALL / TEXT button phone number
-    4) Pet photos
-    5) Trait boxes
-    6) Status / lost information / behavior / vet / contacts
-    7) Facebook share link
-    8) Public website link
-    9) Image file names
+    3) Call/Text number
+    4) Pet image file names
+    5) Traits
+    6) Lost info
+    7) Behavior / commands / details
+    8) Facebook share link
+    9) Website copy link
+    10) Camper / truck images
 
-    IMPORTANT:
-    - Keep all quote marks " "
-    - Keep all < > brackets
-    - Only replace the text BETWEEN tags unless a comment says otherwise
-    - If you change an image file name here, the real image file must also match it
-    - Phone links should use digits only in the href when possible
+    IMAGE FILE NAMES CURRENTLY USED IN THIS CODE:
+    - pet-1.png
+    - pet-2.png
+    - pet-3.png
+    - camper-1.png
+    - truck-1.png
 
-    EXAMPLE:
-    Visible text can look like: 1-716-909-5757
-    But the clickable link can look like: sms:+17169095757
+    IF SOMEONE MAKES THEIR OWN PET PAGE LATER:
+    Replace Rockey's live URL in these 2 places:
+    1) Facebook button
+    2) The WEBSITE_URL value inside the script at the bottom
 
-    ROCKEY'S LIVE PAGE RIGHT NOW:
+    CURRENT LIVE ROCKEY URL:
     https://mypetlink.github.io/rockey/
-
-    IF SOMEONE MAKES THEIR OWN PAGE LATER:
-    They need to replace Rockey's live page URL in 2 places:
-    1) The FACEBOOK share button link
-    2) The plain website link shown under it
-
-    EXAMPLE FUTURE URL:
-    https://yourusername.github.io/your-pet-page/
 
     =====================================================================
   -->
@@ -61,6 +64,8 @@
       --blue-2: #68a8ff;
       --red: #d71423;
       --red-2: #ff3848;
+      --purple-1: #8c8cff;
+      --purple-2: #5e62d9;
       --silver-1: #f1f5fb;
       --silver-2: #93a4be;
       --silver-3: #4d5d77;
@@ -225,6 +230,7 @@
       display: flex;
       justify-content: center;
       width: 100%;
+      margin-bottom: 8px;
     }
 
     .btn {
@@ -242,6 +248,7 @@
       transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
       white-space: nowrap;
       box-shadow: var(--shadow);
+      font-family: inherit;
     }
 
     .btn:hover {
@@ -254,15 +261,15 @@
       padding: 0 22px;
       background: linear-gradient(180deg, #2f7cff, #1454d9);
       box-shadow: 0 14px 30px rgba(27, 98, 255, .28), inset 0 1px 0 rgba(255,255,255,.18);
+      width: min(100%, 620px);
     }
 
-    .btn-facebook {
+    .btn-facebook,
+    .btn-copy {
       display: block;
       width: 100%;
       min-height: 48px;
       padding: 12px 16px;
-      background: linear-gradient(180deg, #2f6de6, #1744c6);
-      box-shadow: 0 16px 30px rgba(23, 68, 198, .28), inset 0 1px 0 rgba(255,255,255,.16);
       border-radius: 14px;
       font-size: .98rem;
       font-weight: 900;
@@ -271,11 +278,40 @@
       text-align: center;
     }
 
+    .btn-facebook {
+      background: linear-gradient(180deg, #2f6de6, #1744c6);
+      box-shadow: 0 16px 30px rgba(23, 68, 198, .28), inset 0 1px 0 rgba(255,255,255,.16);
+    }
+
+    .btn-copy {
+      background: linear-gradient(180deg, #2e74ff, #1454d9);
+      box-shadow: 0 16px 30px rgba(20, 84, 217, .28), inset 0 1px 0 rgba(255,255,255,.16);
+    }
+
+    .photo-wrap {
+      margin-top: 18px;
+      position: relative;
+    }
+
+    .photo-hint {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      margin-bottom: 10px;
+      color: #cdddff;
+      font-size: .88rem;
+      font-weight: 800;
+      letter-spacing: .4px;
+      text-transform: uppercase;
+      text-align: center;
+      opacity: .92;
+    }
+
     .photo-strip {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 10px;
-      margin-top: 18px;
       align-items: stretch;
     }
 
@@ -286,14 +322,20 @@
       background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
       border: 1px solid rgba(174, 210, 255, .15);
       box-shadow: inset 0 0 0 1px rgba(255,255,255,.03), 0 14px 26px rgba(0,0,0,.22);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
     }
 
     .photo img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
-      object-position: center 20%;
+      object-fit: contain;
+      object-position: center;
       display: block;
+      border-radius: 12px;
+      background: rgba(5, 10, 22, .55);
     }
 
     .traits-strip {
@@ -339,9 +381,9 @@
     .section:first-of-type { border-top: 0; }
 
     .bar {
-      display: inline-flex;
+      display: flex;
       align-items: center;
-      gap: 10px;
+      justify-content: center;
       width: 100%;
       min-height: 48px;
       padding: 12px 16px;
@@ -354,11 +396,12 @@
       background: linear-gradient(180deg, var(--red-2), var(--red));
       box-shadow: 0 16px 30px rgba(194, 23, 41, .28), inset 0 1px 0 rgba(255,255,255,.16);
       margin-bottom: 16px;
+      text-align: center;
     }
 
     .bar-neutral {
-      background: linear-gradient(180deg, #28344d, #172032);
-      box-shadow: 0 16px 30px rgba(0, 0, 0, .22), inset 0 1px 0 rgba(255,255,255,.08);
+      background: linear-gradient(180deg, #9b9cff, #6f73ea);
+      box-shadow: 0 16px 30px rgba(111, 115, 234, .24), inset 0 1px 0 rgba(255,255,255,.14);
     }
 
     .panel {
@@ -420,6 +463,8 @@
     .map-label {
       display: inline-flex;
       align-self: start;
+      justify-self: stretch;
+      justify-content: center;
       padding: 10px 14px;
       border-radius: 12px;
       background: linear-gradient(180deg, #22314c, #152036);
@@ -429,6 +474,7 @@
       letter-spacing: .5px;
       text-transform: uppercase;
       color: #f4f8ff;
+      text-align: center;
     }
 
     .map-frame {
@@ -438,6 +484,7 @@
       background: #0d1523;
       box-shadow: var(--glow);
       display: block;
+      text-decoration: none;
     }
 
     .map-frame img {
@@ -445,6 +492,20 @@
       display: block;
       aspect-ratio: 16 / 8.2;
       object-fit: cover;
+    }
+
+    .map-placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 230px;
+      padding: 20px;
+      text-align: center;
+      color: #d6e4ff;
+      font-weight: 800;
+      line-height: 1.5;
+      background:
+        linear-gradient(180deg, rgba(15, 26, 48, .96), rgba(9, 17, 31, .98));
     }
 
     .contacts-grid {
@@ -532,6 +593,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      padding: 10px;
     }
 
     .vehicle-photo img {
@@ -542,18 +604,17 @@
       height: auto;
       object-fit: contain;
       object-position: center;
+      border-radius: 12px;
+      background: rgba(5, 10, 22, .55);
     }
 
-    .plain-link {
-      display: block;
-      margin-top: 12px;
-      color: #8ec0ff;
-      text-decoration: none;
+    .copy-status {
+      margin-top: 10px;
+      color: #d9e8ff;
       font-weight: 700;
-      word-break: break-all;
+      text-align: center;
+      min-height: 22px;
     }
-
-    .plain-link:hover { text-decoration: underline; }
 
     @media (max-width: 900px) {
       .photo {
@@ -613,12 +674,16 @@
         width: 100%;
       }
 
+      .photo-wrap {
+        overflow: hidden;
+      }
+
       .photo-strip {
         display: flex;
         gap: 12px;
         overflow-x: auto;
         overflow-y: hidden;
-        padding-bottom: 6px;
+        padding-bottom: 10px;
         margin-left: -2px;
         margin-right: -2px;
         scroll-snap-type: x mandatory;
@@ -630,22 +695,43 @@
       }
 
       .photo-strip::-webkit-scrollbar-thumb {
-        background: rgba(255,255,255,.18);
+        background: rgba(255,255,255,.22);
         border-radius: 999px;
       }
 
       .photo {
-        flex: 0 0 82%;
+        flex: 0 0 84%;
         height: auto;
-        aspect-ratio: 4 / 5;
+        min-height: 470px;
         scroll-snap-align: start;
+        padding: 10px;
       }
 
       .photo img {
         width: 100%;
         height: 100%;
-        object-fit: cover;
+        object-fit: contain;
         object-position: center;
+      }
+
+      .photo-wrap::after {
+        content: "›";
+        position: absolute;
+        right: 8px;
+        top: 58%;
+        transform: translateY(-50%);
+        width: 38px;
+        height: 38px;
+        border-radius: 999px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.7rem;
+        font-weight: 900;
+        color: #ffffff;
+        background: rgba(35, 66, 140, .78);
+        box-shadow: 0 8px 22px rgba(0,0,0,.3);
+        pointer-events: none;
       }
 
       .traits-strip {
@@ -666,7 +752,8 @@
         min-height: 180px;
       }
 
-      .bar {
+      .bar,
+      .map-label {
         font-size: .85rem;
         letter-spacing: .5px;
         padding: 11px 13px;
@@ -674,6 +761,10 @@
 
       .panel {
         padding: 15px;
+      }
+
+      .map-placeholder {
+        min-height: 220px;
       }
     }
 
@@ -686,6 +777,7 @@
 
       .photo {
         flex-basis: 88%;
+        min-height: 460px;
       }
 
       .contact-tile {
@@ -705,46 +797,39 @@
 
     <main class="page">
 
-      <!-- =========================================================
-           TOP HERO SECTION
-           ========================================================= -->
+      <!-- TOP HERO SECTION -->
       <section class="hero">
         <div class="title-bar">
           <span class="line"></span>
-
-          <!-- EDIT PET NAME HERE -->
           <h1 class="pet-name" data-pet-name>ROCKEY</h1>
-
           <span class="line"></span>
         </div>
 
         <div class="top-row">
           <div class="primary-contact">
-            <!-- EDIT TOP CONTACT NAME HERE -->
             <span class="label">Maria</span>
-
-            <!-- EDIT TOP CONTACT DISPLAY NUMBER HERE -->
             <span>— 1-716-909-5757</span>
           </div>
         </div>
 
         <div class="top-actions">
-          <!--
-            ONE TOP BUTTON
-            EDIT PHONE NUMBER ONLY
-            If someone wants their own number later, replace only the number below
-          -->
+          <!-- EDIT PHONE NUMBER ONLY -->
           <a class="btn btn-primary" href="sms:+17169095757">CALL / TEXT</a>
         </div>
 
-        <div class="photo-strip">
+        <div class="photo-wrap">
+          <div class="photo-hint">Swipe for more photos →</div>
+
           <!--
-            EDIT PET PHOTO FILE NAMES HERE
-            If someone uses their own images later, replace the file names below
+            PET IMAGE FILES
+            These names match the files shown in your repo.
+            If someone swaps images later, they must change the file names here too.
           -->
-          <div class="photo"><img src="pet-1.jpg" alt="Pet photo 1"></div>
-          <div class="photo"><img src="pet-2.jpg" alt="Pet photo 2"></div>
-          <div class="photo"><img src="pet-3.jpg" alt="Pet photo 3"></div>
+          <div class="photo-strip">
+            <div class="photo"><img src="pet-1.jpg" alt="Pet photo 1"></div>
+            <div class="photo"><img src="pet-2.jpg" alt="Pet photo 2"></div>
+            <div class="photo"><img src="pet-3.jpg" alt="Pet photo 3"></div>
+          </div>
         </div>
 
         <div class="traits-strip">
@@ -772,8 +857,8 @@
         <div class="bar">MOST RECENT STATUS AS OF LAST UPDATE</div>
         <div class="panel stack">
           <div class="field"><strong>Last Updated:</strong> [ENTER DATE &amp; TIME]</div>
-          <div class="field"><strong>Current Status:</strong> [ie: home, camping with family at ___ / local to home in Western New York / traveling / other]</div>
-          <div class="field"><strong>Important Notes:</strong> [Leave blank if none OR add important real-time info such as hikes, areas, or movement]</div>
+          <div class="field"><strong>Current Status:</strong> [ie: home, camping with family see below / traveling / other]</div>
+          <div class="field"><strong>Important Notes:</strong> [recent illness or surgeries,real-time info such as location of current hike, kenneling, etc]</div>
         </div>
       </section>
 
@@ -805,9 +890,28 @@
 
           <div class="map-card">
             <span class="map-label">LAST SEEN LOCATION</span>
+
+            <!--
+              MAP LINK
+              Replace Google Maps URL here when you have a real last-seen map link.
+            -->
             <a class="map-frame" href="https://www.google.com/maps" target="_blank" rel="noopener" aria-label="Open last seen location in Google Maps">
-              <img src="map-preview.jpg" alt="Last seen location map">
+              <!--
+                If you add a real map image later, replace no-map with your image file name.
+                Example:
+                <img src="map-preview.png" alt="Last seen location map" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              -->
+              <img
+                src="no-map"
+                alt="Last seen location map"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+              >
+              <div class="map-placeholder" style="display:none;">
+                Add a map image later if needed.<br>
+                The location button above can still link to Google Maps.
+              </div>
             </a>
+
             <div class="field"><strong>Address:</strong> [VISIBLE LAST SEEN ADDRESS HERE]</div>
           </div>
         </div>
@@ -1023,25 +1127,12 @@
         <div class="panel stack">
           <div class="field"><strong>PLEASE HELP <span data-pet-name>ROCKEY</span> BY SHARING THIS SITE ON YOUR PERSONAL SOCIAL MEDIA AND ANY/ALL LOCAL TO THE AREA LOST PET GROUPS.</strong><br>FULL DETAILS AND LIVE UPDATES:</div>
 
-          <!--
-            FACEBOOK SHARE BUTTON
-            ROCKEY'S LIVE PAGE IS ALREADY FILLED IN BELOW.
-
-            IF SOMEONE MAKES THEIR OWN PAGE LATER:
-            replace ONLY the URL after u=
-            CURRENT ROCKEY URL:
-            https://mypetlink.github.io/rockey/
-          -->
+          <!-- EDIT ONLY THE URL AFTER u= IF SOMEONE MAKES THEIR OWN PAGE -->
           <a class="btn btn-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://mypetlink.github.io/rockey/" target="_blank" rel="noopener">FACEBOOK</a>
 
-          <!--
-            PUBLIC WEBSITE LINK
-            ROCKEY'S LIVE PAGE IS ALREADY FILLED IN BELOW.
-
-            IF SOMEONE MAKES THEIR OWN PAGE LATER:
-            replace the full URL below with their own live page URL
-          -->
-          <a class="plain-link" href="https://mypetlink.github.io/rockey/" target="_blank" rel="noopener">https://mypetlink.github.io/rockey/</a>
+          <!-- THIS BUTTON COPIES THE WEBSITE LINK FOR EASY PASTING -->
+          <button class="btn btn-copy" id="copyWebsiteButton" type="button">COPY WEBSITE LINK</button>
+          <div class="copy-status" id="copyStatus"></div>
 
           <div class="contact-note">Share the link with friends, family, neighbors: think Nextdoor App, text, email, local authorities.</div>
           <div class="field"><strong>Suggested post text (copy):</strong><br>Missing dog: <span data-pet-name>ROCKEY</span><br>Female, grey, 45 lbs<br>Friendly but scared — do not chase<br>Call/Text: 1-716-909-5757</div>
@@ -1093,6 +1184,27 @@
       document.querySelectorAll('[data-pet-name]').forEach((el) => {
         el.textContent = petName;
       });
+
+      /*
+        WEBSITE URL TO COPY
+        If someone makes their own page later,
+        replace the value below with their own live page URL.
+      */
+      const WEBSITE_URL = 'https://mypetlink.github.io/rockey/';
+
+      const copyButton = document.getElementById('copyWebsiteButton');
+      const copyStatus = document.getElementById('copyStatus');
+
+      if (copyButton) {
+        copyButton.addEventListener('click', async function () {
+          try {
+            await navigator.clipboard.writeText(WEBSITE_URL);
+            copyStatus.textContent = 'Website link copied.';
+          } catch (error) {
+            copyStatus.textContent = 'Copy failed. Long-press and copy the page URL from your browser.';
+          }
+        });
+      }
     })();
   </script>
 </body>
