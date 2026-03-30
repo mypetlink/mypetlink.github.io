@@ -520,19 +520,77 @@
     .plain-link:hover { text-decoration: underline; }
 
     @media (max-width: 760px) {
-      .hero,
-      .section { padding-left: 18px; padding-right: 18px; }
-      .grid-2 { grid-template-columns: 1fr; }
-      .traits-strip { grid-template-columns: repeat(5, minmax(0, 1fr)); }
-      .vehicle-photo-grid,
-      .contacts-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .pet-name { font-size: 2.5rem; }
-      .primary-contact { font-size: 1rem; }
-      .button-row { flex-direction: column; }
-      .button-row .btn { width: 100%; }
-      .photo { height: 320px; }
-      .vehicle-photo { height: 200px; }
-    }
+  .hero,
+  .section {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .pet-name {
+    font-size: 2.5rem;
+  }
+
+  .primary-contact {
+    font-size: 1rem;
+  }
+
+  .button-row .btn {
+    width: 100%;
+  }
+
+  /* DOG PHOTOS: horizontal scroll, full images */
+  .photo-strip {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .photo-strip::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  .photo-strip::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,.18);
+    border-radius: 999px;
+  }
+
+  .photo {
+    flex: 0 0 78%;
+    height: auto;
+    scroll-snap-align: start;
+  }
+
+  .photo img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    object-position: center;
+    display: block;
+  }
+
+  /* TOP TRAITS: clean 2-column layout */
+  .traits-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  /* VEHICLES + CONTACTS stay readable */
+  .vehicle-photo-grid,
+  .contacts-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .vehicle-photo {
+    height: 200px;
+  }
+}
   </style>
 </head>
 <body>
@@ -875,8 +933,8 @@
         <div class="bar">SHARE THIS SITE (ONLY USED WHEN LOST)</div>
         <div class="panel stack">
           <div class="field"><strong>HELP FIND <span data-pet-name>ROCKEY</span> BY SHARING THIS SITE.</strong><br>FULL DETAILS AND LIVE UPDATES:</div>
-          <a class="btn btn-facebook" href="#">FACEBOOK</a>
-          <a class="plain-link" href="#">[WEBPAGE LINK GOES HERE]</a>
+          <a class="btn btn-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://mypetlink.github.io/rockey/" target="_blank" rel="noopener">FACEBOOK</a>
+          <a class="plain-link" href="https://mypetlink.github.io/rockey/" target="_blank" rel="noopener">https://mypetlink.github.io/rockey/</a>
           <div class="contact-note">Share the link on any social media platforms, in text or emails to help spread the search for Rockey.</div>
           <div class="field"><strong>Suggested post text (copy):</strong><br>Missing dog: <span data-pet-name>ROCKEY</span><br>Female, grey, 45 lbs<br>Friendly but scared — do not chase<br>Call/Text: 1-716-909-5757</div>
         </div>
