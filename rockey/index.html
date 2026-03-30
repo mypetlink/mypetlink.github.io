@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rockey ID Tag</title>
+  <style>
+    :root {
+      --bg-1: #05070c;
+      --bg-2: #0a1120;
+      --panel: #0e1728;
+      --panel-2: #111d31;
+      --line: rgba(173, 216, 255, 0.18);
+      --text: #eef4ff;
+      --muted: #b9c7df;
+      --blue: #2e74ff;
+      --blue-2: #68a8ff;
+      --red: #d71423;
+      --red-2: #ff3848;
+      --silver-1: #f1f5fb;
+      --silver-2: #93a4be;
+      --silver-3: #4d5d77;
+      --glow: 0 0 0 1px rgba(117, 170, 255, 0.16), 0 0 28px rgba(53, 112, 255, 0.18);
+      --radius-xl: 28px;
+      --radius-lg: 18px;
+      --radius-md: 14px;
+      --shadow: 0 20px 50px rgba(0,0,0,.45);
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background:
+        radial-gradient(circle at top center, rgba(34, 76, 173, 0.22), transparent 30%),
+        linear-gradient(180deg, var(--bg-1), var(--bg-2));
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    body {
+      padding: 24px 14px 48px;
+    }
+
+    .shell {
+      width: min(100%, 860px);
+      margin: 0 auto;
+      position: relative;
+      padding: 14px;
+      border-radius: 34px;
+      background:
+        linear-gradient(145deg, rgba(210, 227, 255, .95), rgba(88, 108, 140, .72) 22%, rgba(13, 19, 35, .92) 52%, rgba(120, 147, 188, .6) 84%, rgba(230, 240, 255, .9));
+      box-shadow: 0 30px 80px rgba(0,0,0,.6);
+      overflow: hidden;
+    }
+
+    .shell::before,
+    .shell::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .shell::before {
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.45), transparent 10%, transparent 90%, rgba(255,255,255,.18)),
+        linear-gradient(180deg, rgba(104,168,255,.18), transparent 25%, transparent 75%, rgba(255,74,90,.12));
+      mix-blend-mode: screen;
+    }
+
+    .frame-corners {
+      pointer-events: none;
+      position: absolute;
+      inset: 14px;
+      z-index: 1;
+    }
+
+    .corner {
+      position: absolute;
+      width: 94px;
+      height: 94px;
+      border: 2px solid rgba(180, 213, 255, 0.55);
+      box-shadow: 0 0 26px rgba(60, 126, 255, 0.18);
+      border-radius: 18px;
+    }
+
+    .corner::before {
+      content: "";
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      background: linear-gradient(180deg, #99c4ff, #2576ff);
+      border-radius: 4px;
+      box-shadow: 0 0 18px rgba(88, 163, 255, .7);
+    }
+
+    .tl { top: 0; left: 0; border-right: 0; border-bottom: 0; }
+    .tr { top: 0; right: 0; border-left: 0; border-bottom: 0; }
+    .bl { bottom: 0; left: 0; border-right: 0; border-top: 0; }
+    .br { bottom: 0; right: 0; border-left: 0; border-top: 0; }
+    .tl::before { top: 12px; left: 12px; }
+    .tr::before { top: 12px; right: 12px; }
+    .bl::before { bottom: 12px; left: 12px; }
+    .br::before { bottom: 12px; right: 12px; }
+
+    .page {
+      position: relative;
+      z-index: 2;
+      border-radius: 24px;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(8, 15, 28, .95), rgba(9, 18, 34, .98));
+      box-shadow: inset 0 0 0 1px rgba(176, 214, 255, .16);
+    }
+
+    .hero {
+      padding: 26px 28px 20px;
+      background:
+        radial-gradient(circle at 50% -15%, rgba(80, 136, 255, .35), transparent 32%),
+        linear-gradient(180deg, #10203c, #0b1526 72%);
+      border-bottom: 1px solid rgba(168, 208, 255, .14);
+    }
+
+    .title-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .title-bar .line {
+      height: 2px;
+      flex: 1;
+      max-width: 120px;
+      background: linear-gradient(90deg, transparent, rgba(121, 183, 255, 0.7), transparent);
+    }
+
+    .pet-name {
+      margin: 0;
+      font-size: clamp(2.2rem, 4vw, 4rem);
+      line-height: .95;
+      letter-spacing: 1.8px;
+      font-weight: 900;
+      text-transform: uppercase;
+      color: #f8fbff;
+      text-shadow: 0 0 20px rgba(255,255,255,.08);
+    }
+
+    .top-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .primary-contact {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: clamp(1rem, 2vw, 1.35rem);
+      color: var(--text);
+      font-weight: 700;
+      letter-spacing: .2px;
+    }
+
+    .primary-contact .label {
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border: 0;
+      border-radius: 14px;
+      text-decoration: none;
+      color: #fff;
+      font-weight: 800;
+      letter-spacing: .4px;
+      cursor: pointer;
+      transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
+      white-space: nowrap;
+      box-shadow: var(--shadow);
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.03);
+    }
+
+    .btn-primary {
+      min-height: 56px;
+      padding: 0 22px;
+      background: linear-gradient(180deg, #2f7cff, #1454d9);
+      box-shadow: 0 14px 30px rgba(27, 98, 255, .28), inset 0 1px 0 rgba(255,255,255,.18);
+    }
+
+    .btn-secondary {
+      min-height: 52px;
+      padding: 0 20px;
+      background: linear-gradient(180deg, #1b2232, #101725);
+      border: 1px solid rgba(168, 208, 255, .16);
+      color: #f2f6ff;
+    }
+
+    .btn-facebook {
+      display: block;
+      width: 100%;
+      min-height: 48px;
+      padding: 12px 16px;
+      background: linear-gradient(180deg, #2f6de6, #1744c6);
+      box-shadow: 0 16px 30px rgba(23, 68, 198, .28), inset 0 1px 0 rgba(255,255,255,.16);
+      border-radius: 14px;
+      font-size: .98rem;
+      font-weight: 900;
+      letter-spacing: .75px;
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    .photo-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .photo {
+      aspect-ratio: 1 / 1;
+      border-radius: 16px;
+      overflow: hidden;
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
+      border: 1px solid rgba(174, 210, 255, .15);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.03), 0 14px 26px rgba(0,0,0,.22);
+    }
+
+    .photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .traits-strip {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .trait-chip {
+      padding: 12px 12px 13px;
+      border-radius: 14px;
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      border: 1px solid rgba(173,216,255,.12);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.02);
+    }
+
+    .trait-chip .k {
+      display: block;
+      font-size: .72rem;
+      font-weight: 800;
+      letter-spacing: .75px;
+      text-transform: uppercase;
+      color: #9fb4d7;
+      margin-bottom: 5px;
+    }
+
+    .trait-chip .v {
+      display: block;
+      font-size: .95rem;
+      font-weight: 700;
+      color: #f3f7ff;
+      line-height: 1.35;
+    }
+
+    .photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .section {
+      padding: 22px 28px;
+      border-top: 1px solid rgba(173,216,255,.11);
+    }
+
+    .section:first-of-type { border-top: 0; }
+
+    .bar {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      min-height: 48px;
+      padding: 12px 16px;
+      border-radius: 14px;
+      font-size: .98rem;
+      font-weight: 900;
+      letter-spacing: .75px;
+      text-transform: uppercase;
+      color: white;
+      background: linear-gradient(180deg, var(--red-2), var(--red));
+      box-shadow: 0 16px 30px rgba(194, 23, 41, .28), inset 0 1px 0 rgba(255,255,255,.16);
+      margin-bottom: 16px;
+    }
+
+    .bar-neutral {
+      background: linear-gradient(180deg, #28344d, #172032);
+      box-shadow: 0 16px 30px rgba(0, 0, 0, .22), inset 0 1px 0 rgba(255,255,255,.08);
+    }
+
+    .panel {
+      background: linear-gradient(180deg, rgba(17, 27, 45, .92), rgba(12, 20, 34, .96));
+      border: 1px solid rgba(173,216,255,.12);
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow: var(--glow);
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .stack {
+      display: grid;
+      gap: 10px;
+    }
+
+    .field {
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(173,216,255,.09);
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 1rem;
+    }
+
+    .field:last-child { border-bottom: 0; }
+
+    .field strong,
+    .field b {
+      color: var(--text);
+      font-weight: 800;
+    }
+
+    .subtle {
+      color: var(--muted);
+      font-size: .96rem;
+    }
+
+    .tight-list {
+      margin: 0;
+      padding-left: 1.15rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .tight-list li + li { margin-top: 4px; }
+
+    .map-card {
+      display: grid;
+      gap: 14px;
+    }
+
+    .map-label {
+      display: inline-flex;
+      align-self: start;
+      padding: 10px 14px;
+      border-radius: 12px;
+      background: linear-gradient(180deg, #22314c, #152036);
+      border: 1px solid rgba(173,216,255,.12);
+      font-size: .92rem;
+      font-weight: 800;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+      color: #f4f8ff;
+    }
+
+    .map-frame {
+      overflow: hidden;
+      border-radius: 18px;
+      border: 1px solid rgba(173,216,255,.14);
+      background: #0d1523;
+      box-shadow: var(--glow);
+    }
+
+    .map-frame img {
+      width: 100%;
+      display: block;
+      aspect-ratio: 16 / 8.2;
+      object-fit: cover;
+    }
+
+    .button-row {
+      display: block;
+      margin-top: 14px;
+    }
+
+    .button-row .btn {
+      flex: 1 1 220px;
+    }
+
+    .contacts-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .contact-tile {
+      display: block;
+      border-radius: 14px;
+      padding: 12px 10px;
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      border: 1px solid rgba(173,216,255,.14);
+      text-decoration: none;
+      color: inherit;
+      min-height: 108px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      box-shadow: var(--glow);
+      transition: transform .18s ease, filter .18s ease;
+    }
+
+    .contact-tile:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.05);
+    }
+
+    .contact-tile .who {
+      color: #f3f7ff;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .contact-tile .num {
+      color: var(--muted);
+      font-size: .98rem;
+      line-height: 1.45;
+    }
+
+    .contact-note {
+      margin-top: 14px;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .microcopy {
+      margin-top: 14px;
+      color: #e9efff;
+      font-weight: 700;
+    }
+
+    .section-title {
+      margin: 0 0 12px;
+      font-size: 1.18rem;
+      font-weight: 900;
+      letter-spacing: .35px;
+      color: #f7fbff;
+    }
+
+    .footer-note {
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 1rem;
+    }
+
+    .dev-note {
+      margin-top: 16px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.04);
+      border: 1px dashed rgba(173,216,255,.18);
+      color: #d7e5ff;
+      font-size: .92rem;
+      line-height: 1.6;
+    }
+
+    .vehicle-photo-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .vehicle-photo {
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(173,216,255,.12);
+      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      box-shadow: var(--glow);
+    }
+
+    .vehicle-photo img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+    }
+
+    .vehicle-photo .caption {
+      padding: 10px 12px 12px;
+      color: var(--muted);
+      font-size: .9rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .55px;
+    }
+
+    .plain-link {
+      display: block;
+      margin-top: 12px;
+      color: #8ec0ff;
+      text-decoration: none;
+      font-weight: 700;
+      word-break: break-all;
+    }
+
+    .plain-link:hover { text-decoration: underline; }
+
+    @media (max-width: 760px) {
+      .hero,
+      .section { padding-left: 18px; padding-right: 18px; }
+      .grid-2 { grid-template-columns: 1fr; }
+      .traits-strip { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+      .vehicle-photo-grid,
+      .contacts-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .pet-name { font-size: 2.5rem; }
+      .primary-contact { font-size: 1rem; }
+      .button-row { flex-direction: column; }
+      .button-row .btn { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <div class="frame-corners">
+      <div class="corner tl"></div>
+      <div class="corner tr"></div>
+      <div class="corner bl"></div>
+      <div class="corner br"></div>
+    </div>
+
+    <main class="page">
+      <!-- ======================================================
+      SECTION: TOP SECTION (DO NOT CHANGE ORDER)
+      WHAT TO EDIT:
+      - Replace pet name below
+      - Replace primary contact name and number below
+      - Keep the CALL / TEXT button here at the top with the number
+      - Replace the 3 image files below with your own pet images
+      ======================================================= -->
+      <section class="hero">
+        <div class="title-bar">
+          <span class="line"></span>
+          <h1 class="pet-name" data-pet-name>ROCKEY</h1>
+          <span class="line"></span>
+        </div>
+
+        <div class="top-row">
+          <div class="primary-contact">
+            <span class="label">Maria</span>
+            <span>— 1-716-909-5757</span>
+          </div>
+
+          <a class="btn btn-primary" href="sms:17169095757">CALL / TEXT</a>
+        </div>
+
+        <div class="photo-strip">
+          <div class="photo"><img src="pet-1.jpg" alt="Pet photo 1"></div>
+          <div class="photo"><img src="pet-2.jpg" alt="Pet photo 2"></div>
+          <div class="photo"><img src="pet-3.jpg" alt="Pet photo 3"></div>
+        </div>
+
+        <div class="traits-strip">
+          <div class="trait-chip"><span class="k">Sex</span><span class="v">Female</span></div>
+          <div class="trait-chip"><span class="k">Age</span><span class="v">2 years old</span></div>
+          <div class="trait-chip"><span class="k">Weight</span><span class="v">45 lbs</span></div>
+          <div class="trait-chip"><span class="k">Breed</span><span class="v">Mixed breed</span></div>
+          <div class="trait-chip"><span class="k">Coat &amp; Eyes</span><span class="v">Grey, short-haired, hazel eyes</span></div>
+        </div>
+      </section>
+
+      <!-- ======================================================
+      SECTION: IF YOU HAVE PET
+      WHAT TO EDIT:
+      - Keep the bullet structure short and direct
+      - Replace Rockey-specific lines with your own pet if needed
+      ======================================================= -->
+      <section class="section">
+        <div class="bar">IF YOU HAVE ROCKEY</div>
+        <div class="panel">
+          <ul class="tight-list">
+            <li>Please call or text immediately</li>
+            <li>She is friendly and loved</li>
+            <li>Please keep her secure</li>
+            <li>She is kennel trained (all of these bullets are of course editable as is all answers to all questions in this code)</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ======================================================
+      SECTION: STATUS SECTION
+      WHAT TO EDIT:
+      - Always keep this section in this same order
+      - Update the Last Updated line first
+      - Then update Current Status
+      - Then update Important Notes
+      ======================================================= -->
+      <section class="section">
+        <div class="bar">MOST RECENT STATUS AS OF LAST UPDATE</div>
+        <div class="panel stack">
+          <div class="field"><strong>Last Updated:</strong> [ENTER DATE &amp; TIME]</div>
+          <div class="field"><strong>Current Status:</strong> [ie: home, Camping with family at ___ / Local to home in Western New York / Traveling / Other]</div>
+          <div class="field"><strong>Important Notes:</strong> [Leave blank if none OR add important real-time info such as being on a hikes, areas, movement]</div>
+        </div>
+      </section>
+
+      <!-- ======================================================
+      SECTION: IF YOU SEE PET LOOSE BUT DO NOT HAVE HER
+      WHAT TO EDIT:
+      - Keep this wording practical and fast to read
+      - Add/remove bullet lines as needed
+      ======================================================= -->
+      <section class="section">
+        <div class="bar">IF YOU SEE ROCKEY LOOSE BUT DO NOT HAVE HER</div>
+        <div class="panel">
+          <ul class="tight-list">
+            <li>Please call or text immediately</li>
+            <li>Please send a photo or video if possible</li>
+            <li>Please send exact location, if possible, include latitude and longitude (can be found using Google Maps)</li>
+            <li>Let us know direction of travel if seen moving</li>
+            <li>If safe, you may follow from a far distance, DO NOT APPROACH- you will spoke her.</li>
+          </ul>
+          <p class="microcopy">Even brief sightings help us locate her.</p>
+        </div>
+      </section>
+
+      <!-- ======================================================
+      SECTION: LOST MODE SECTION (ONLY USED WHEN NEEDED)
+      WHAT TO EDIT:
+      - This section is for when the pet is actively lost
+      - Update sighting details
+      - Replace map-preview.jpg with your own map image screenshot if desired
+      - Replace the Google Maps link in the VIEW LAST SEEN LOCATION button
+      ======================================================= -->
+      <section class="section">
+        <div class="bar">IF LOST — LAST CONFIRMED SIGHTING</div>
+        <div class="grid-2">
+          <div class="panel stack">
+            <div class="field"><strong>Last Seen:</strong> [Location / Address]</div>
+            <div class="field"><strong>Date / Time:</strong> [Enter]</div>
+            <div class="field"><strong>Rockey’s Condition:</strong> [Enter condition at last sighting]</div>
+            <div class="field"><strong>What Happened:</strong> [Short description]</div>
+            <div class="field"><strong>Direction of Travel:</strong> [If known]</div>
+            <div class="field"><strong>Approx Distance Traveled From Where Originally Lost:</strong> [Enter]</div>
+          </div>
+
+          <div class="map-card">
+            <span class="map-label">LAST SEEN LOCATION</span>
+            <a class="map-frame" href="https://www.google.com/maps" target="_blank" rel="noopener" aria-label="Open last seen location in Google Maps">
+              <img src="map-preview.jpg" alt="Last seen location map">
+            </a>
+            <div class="field"><strong>Address:</strong> [VISIBLE LAST SEEN ADDRESS HERE]</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================================
+      SECTION: ACTIVE SEARCH / GROUP (IF APPLICABLE)
+      WHAT TO EDIT:
+      - Leave empty or fill in if a search group is helping
+      - Keep the warning line at the bottom
+      ======================================================= -->
+      <section class="section">
+        <div class="bar bar-neutral">ACTIVE SEARCH / GROUP (IF APPLICABLE)</div>
+        <div class="panel stack">
+          <div class="field"><strong>Search Group Name:</strong> [Enter]</div>
+          <div class="field"><strong>Contact Name:</strong> [Enter]</div>
+          <div class="field"><strong>Contact Phone:</strong> [Enter]</div>
+          <div class="field"><strong>If anyone has more current information than what s shown here:</strong><br>• Please contact us immediately<br>• If we are unreachable, contact the search group listed above</div>
+          <div class="field"><strong>DO NOT CHASE OR APPROACH ROCKEY</strong></div>
+        </div>
+      </section>
+
+      <!-- ======================================================
+      SECTION: BEHAVIOR & HANDLING
+      WHAT TO EDIT:
+      - Keep Rockey's exact info here unless you are changing pets
+      - This section can be reused for any pet later
+      ======================================================= -->
+      <section class="section">
+        <div class="bar">BEHAVIOR &amp; HANDLING</div>
+        <div class="grid-2">
+          <div class="panel">
+            <ul class="tight-list">
+              <li>Shy, friendly</li>
+              <li>Knows her name very well</li>
+              <li>Scared of loud noises (fireworks, gunfire)</li>
+              <li>Do not chase or approach</li>
+              <li>Use calm, soft voice</li>
+              <li>If she comes to you, get down to her level</li>
+              <li>May bark or growl while wagging tail when unsure</li>
+              <li>May show ridged back when scared or uncertain</li>
+              <li>Will try to hide under objects (tables, structures)</li>
+              <li>If approached, may bolt to another hiding spot</li>
+              <li>Does not like toes touched by strangers</li>
+              <li>Does not like car rides</li>
+              <li>Has never bitten anyone</li>
+            </ul>
+          </div>
+
+          <div class="stack">
+            <div class="panel">
+              <h3 class="section-title">Additional Traits</h3>
+              <ul class="tight-list">
+                <li>Indoor dog</li>
+                <li>Never spends time outside unsupervised</li>
+                <li>Has never been lost before</li>
+                <li>Gets along with dogs and cats</li>
+              </ul>
+            </div>
+
+            <div class="panel">
+              <h3 class="section-title">Commands</h3>
+              <ul class="tight-list">
+                <li>Sit</li>
+                <li>Stay</li>
+                <li>Lay down</li>
+              </ul>
+            </div>
+
+            <div class="panel">
+              <h3 class="section-title">Nicknames</h3>
+              <ul class="tight-list">
+                <li>Rockey Girl</li>
+                <li>Baby Girl</li>
+                <li>Rockey Road</li>
+                <li>Love Bug</li>
+              </ul>
+            </div>
+
+            <div class="panel">
+              <h3 class="section-title">Comfort / Personality</h3>
+              <ul class="tight-list">
+                <li>Loves dog beds and blankets</li>
+                <li>Nests blankets</li>
+                <li>Very active, young energy</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================================
+      SECTION: FOOD / LURE INFORMATION
+      ======================================================= -->
+      <section class="section">
+        <div class="bar">FOOD / LURE INFORMATION</div>
+        <div class="panel grid-2">
+          <div>
+            <ul class="tight-list">
+              <li>Purina Pro Plan chicken dry food</li>
+              <li>Purina Pro Plan wet food</li>
+              <li>Especially:</li>
+            </ul>
+            <ul class="tight-list" style="margin-top:8px;">
+              <li>chicken</li>
+              <li>beef</li>
+              <li>turkey chunks with vegetables</li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="section-title">Favorite treats:</h3>
+            <ul class="tight-list">
+              <li>Freeze-dried chicken</li>
+              <li>DentaStix</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================================
+      SECTION: IDENTIFICATION DETAILS
+      ======================================================= -->
+      <section class="section">
+        <div class="bar">IDENTIFICATION DETAILS</div>
+        <div class="panel stack">
+          <div class="field"><strong>Female | 2 years old | 45 lbs | Mixed breed | Spayed</strong></div>
+          <div class="field"><strong>Coat:</strong><br>Grey, short-haired, hazel eyes</div>
+          <div class="field"><strong>Markings:</strong><br>White flying-squirrel-shaped patch on chest<br>Small white patch under chin</div>
+          <div class="field"><strong>Distinct Features:</strong><br>Circular permanent hot spot on left lower chest / ribcage<br>Naturally sparse belly fur</div>
+          <div class="field"><strong>Microchipped:</strong> Yes — [ADD NUMBER]</div>
+          <div class="field"><strong>Collar / Harness / Clothing Items Worn At Time Of Separation:</strong> [Enter]</div>
+        </div>
+      </section>
+
+      <!-- ======================================================
+      SECTION: HOME / REGION
+      ======================================================= -->
+      <section class="section">
+        <div class="bar bar-neutral">HOME / REGION</div>
+        <div class="panel stack">
+          <div class="field"><strong>Home Region:</strong> Western New York (716)</div>
+          <div class="field"><strong>City / State / Zip:</strong> Orchard Park NY 14127</div>
+        </div>
+      </section>
+
+      <!-- ======================================================
+      SECTION: TRAVEL / CAMPING INFORMATION
+      ======================================================= -->
+      <section class="section">
+        <div class="bar">TRAVEL / CAMPING INFORMATION</div>
+        <div class="panel stack">
+          <div class="field"><strong>If Rockey is found outside Western New York, we may be traveling or camping</strong></div>
+          <div class="field"><strong>Current Travel Status:</strong> [Enter]</div>
+          <div class="field"><strong>Dates Of Stay:</strong> [Enter]</div>
+          <div class="field"><strong>Location Name:</strong> [Campground / BLM / Area]</div>
+          <div class="field"><strong>Address:</strong> [Enter]</div>
+          <div class="field"><strong>Latitude / Longitude:</strong> [Enter]</div>
+          <div class="field"><strong>Camp Site Number:</strong> [Enter]</div>
+          <div class="field"><strong>Closest City:</strong> [Enter]</div>
+          <div class="field"><strong>Campground Phone:</strong> [Enter]</div>
+          <div class="field"><strong>Cell Service Notes:</strong> [Enter]</div>
+        </div>
+      </section>
+
+      <!-- ======================================================
+      SECTION: VEHICLE & CAMPER IDENTIFICATION
+      ======================================================= -->
+      <section class="section">
+        <div class="bar">VEHICLE &amp; CAMPER IDENTIFICATION</div>
+        <div class="grid-2">
+          <div class="panel">
+            <h3 class="section-title">Camper</h3>
+            <ul class="tight-list">
+              <li>White Jayco Jayflight</li>
+              <li>32 ft</li>
+              <li>2 doors</li>
+              <li>NY Plate: CA37533</li>
+              <li>Rainbow paw print magnets on rear bumper</li>
+              <li>White cooler strapped to bike rack</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h3 class="section-title">Truck</h3>
+            <ul class="tight-list">
+              <li>Red / maroon Ford F150</li>
+              <li>Black racing stripe</li>
+              <li>NY Plate: ELTNJOHN</li>
+            </ul>
+          </div>
+        </div>
+        <div class="vehicle-photo-grid">
+          <div class="vehicle-photo">
+            <img src="camper-photo.jpg" alt="Camper photo placeholder">
+            <div class="caption">Camper Photo Placeholder</div>
+          </div>
+          <div class="vehicle-photo">
+            <img src="truck-photo.jpg" alt="Truck photo placeholder">
+            <div class="caption">Truck Photo Placeholder</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================================
+      SECTION: VETERINARY / MEDICAL
+      ======================================================= -->
+      <section class="section">
+        <div class="bar">VETERINARY / MEDICAL</div>
+        <div class="grid-2">
+          <div class="panel stack">
+            <div class="field"><strong>Primary Vet:</strong><br>Orchard Park Veterinary Medical Center<br>Address, phone</div>
+            <div class="field"><strong>Emergency:</strong><br>Cornell Vet Hospital<br>930 Campus Rd, Ithaca, NY 14853<br>1-607-253-3060</div>
+          </div>
+          <div class="panel stack">
+            <div class="field"><strong>Medical Notes:</strong><br>• No known existing medical conditions<br>• Teeth in great condition<br>• All limbs and body currently in normal condition<br>• If anything appears wrong, it is new</div>
+            <div class="field"><strong>Rabies:</strong> Up to date — [ADD DATE]</div>
+            <div class="field"><strong>Other Vaccinations:</strong> [Enter]</div>
+            <div class="field"><strong>Flea / Tick / Heartworm:</strong> [Enter]</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================================
+      SECTION: EMERGENCY CARE CONSENT
+      ======================================================= -->
+      <section class="section">
+        <div class="bar">EMERGENCY CARE CONSENT</div>
+        <div class="panel">
+          <p class="subtle"><strong>If Rockey is found injured:</strong></p>
+          <ul class="tight-list">
+            <li>Please take her to the nearest veterinary clinic immediately</li>
+            <li>We give full permission for emergency and life-saving treatment</li>
+            <li>We give consent for resuscitation if necessary – CODE GREEN</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ======================================================
+      SECTION: LOST PATTERN (REUSABLE SECTION)
+      ======================================================= -->
+      <section class="section">
+        <div class="bar">LOST PATTERN (REUSABLE SECTION)</div>
+        <div class="panel stack">
+          <div class="field"><strong>PREVIOUS LOST / SIGHTING PATTERN</strong><br>[Leave blank for now]</div>
+          <div class="field"><strong>Lost &amp; Found History:</strong><br>• Date lost<br>• Sightings while lost<br>• Location found<br>• Date found<br>• Notes / behavior pattern while lost: [hid, walked far away, forest, etc.]</div>
+        </div>
+      </section>
+
+      <!-- ======================================================
+      SECTION: SHARE THIS SITE (ONLY USED WHEN LOST)
+      WHAT TO EDIT:
+      - Add the actual Facebook share link to the button below
+      - Keep this section for lost mode use
+      ======================================================= -->
+      <section class="section">
+        <div class="bar">SHARE THIS SITE (ONLY USED WHEN LOST)</div>
+        <div class="panel stack">
+          <div class="field"><strong>HELP FIND <span data-pet-name>ROCKEY</span> BY SHARING THIS SITE.</strong><br>FULL DETAILS AND LIVE UPDATES:</div>
+          <a class="btn btn-facebook" href="#">FACEBOOK</a>
+          <a class="plain-link" href="#">[WEBPAGE LINK GOES HERE]</a>
+          <div class="contact-note">Share the link on any social media platforms, in text or emails to help spread the search for Rockey.</div>
+          <div class="field"><strong>Suggested post text (copy):</strong><br>Missing dog: <span data-pet-name>ROCKEY</span><br>Female, grey, 45 lbs<br>Friendly but scared — do not chase<br>Call/Text: 1-716-909-5757</div>
+        </div>
+      </section>
+
+      <!-- ======================================================
+      SECTION: FULL CONTACTS LOWER ON PAGE
+      WHAT TO EDIT:
+      - Keep the main top contact at the top of page
+      - Use this lower section for the rest of the numbers
+      ======================================================= -->
+      <section class="section">
+        <div class="bar bar-neutral">CONTACTS — CALL / TEXT</div>
+        <div class="contacts-grid">
+          <a class="contact-tile" href="sms:17169095757">
+            <div class="who">1st Contact</div>
+            <div class="num">Maria<br>1-716-909-5757</div>
+          </a>
+          <a class="contact-tile" href="sms:17164654100">
+            <div class="who">2nd Contact</div>
+            <div class="num">Lisa<br>1-716-465-4100</div>
+          </a>
+          <a class="contact-tile" href="sms:17169014782">
+            <div class="who">3rd Contact</div>
+            <div class="num">Sheri<br>1-716-901-4782</div>
+          </a>
+          <a class="contact-tile" href="sms:17169091961">
+            <div class="who">4th Contact</div>
+            <div class="num">Sue<br>1-716-909-1961</div>
+          </a>
+        </div>
+        <div class="contact-note">Email: mariaalesse@gmail.com</div>
+      </section>
+
+      <!-- ======================================================
+      SECTION: THANK YOU
+      ======================================================= -->
+      <section class="section">
+        <div class="bar">THANK YOU</div>
+        <div class="panel footer-note">
+          We are forever grateful for your help in assisting <span data-pet-name>ROCKEY</span>.<br>
+          We love her dearly and she is most definitely scared and confused.<br>
+          It means everything to us to get her home safely.
+        </div>
+      </section>
+    </main>
+  </div>
+  <script>
+    (function () {
+      const petName = document.querySelector('[data-pet-name]')?.textContent?.trim() || 'PET NAME';
+      document.querySelectorAll('[data-pet-name]').forEach(el => {
+        el.textContent = petName;
+      });
+    })();
+  </script>
+</body>
+</html>
