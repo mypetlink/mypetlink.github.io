@@ -484,13 +484,18 @@
       border: 1px solid rgba(173,216,255,.12);
       background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
       box-shadow: var(--glow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .vehicle-photo img {
       display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
       object-position: center;
     }
 
@@ -540,6 +545,11 @@
     </div>
 
     <main class="page">
+      <!-- 🔴🔴🔴 TOP SECTION — DO NOT CHANGE ORDER 🔴🔴🔴 -->
+      <!-- 🔴 EDIT PET NAME BELOW 🔴 -->
+      <!-- 🔴 EDIT PRIMARY CONTACT NAME + NUMBER BELOW 🔴 -->
+      <!-- 🔴 KEEP CALL / TEXT BUTTON HERE AT TOP 🔴 -->
+      <!-- 🔴 REPLACE THE 3 IMAGE FILE NAMES BELOW WITH YOUR PET IMAGES IF NEEDED 🔴 -->
       <section class="hero">
         <div class="title-bar">
           <span class="line"></span>
@@ -571,6 +581,9 @@
         </div>
       </section>
 
+      <!-- 🔴🔴🔴 IF YOU HAVE PET SECTION 🔴🔴🔴 -->
+      <!-- 🔴 KEEP BULLETS SHORT + DIRECT 🔴 -->
+      <!-- 🔴 REPLACE ROCKEY-SPECIFIC WORDING IF USING FOR ANOTHER PET 🔴 -->
       <section class="section">
         <div class="bar">IF YOU HAVE ROCKEY</div>
         <div class="panel">
@@ -583,6 +596,11 @@
         </div>
       </section>
 
+      <!-- 🔴🔴🔴 STATUS SECTION 🔴🔴🔴 -->
+      <!-- 🔴 ALWAYS KEEP THIS SECTION IN THIS ORDER 🔴 -->
+      <!-- 🔴 UPDATE LAST UPDATED FIRST 🔴 -->
+      <!-- 🔴 THEN UPDATE CURRENT STATUS 🔴 -->
+      <!-- 🔴 THEN UPDATE IMPORTANT NOTES 🔴 -->
       <section class="section">
         <div class="bar">MOST RECENT STATUS AS OF LAST UPDATE</div>
         <div class="panel stack">
@@ -592,6 +610,8 @@
         </div>
       </section>
 
+      <!-- 🔴🔴🔴 IF YOU SEE PET LOOSE BUT DO NOT HAVE HER 🔴🔴🔴 -->
+      <!-- 🔴 KEEP THIS PRACTICAL + FAST TO READ 🔴 -->
       <section class="section">
         <div class="bar">IF YOU SEE ROCKEY LOOSE BUT DO NOT HAVE HER</div>
         <div class="panel">
@@ -606,6 +626,9 @@
         </div>
       </section>
 
+      <!-- 🔴🔴🔴 LOST MODE SECTION — ONLY USE WHEN NEEDED 🔴🔴🔴 -->
+      <!-- 🔴 UPDATE ALL LAST SIGHTING DETAILS HERE 🔴 -->
+      <!-- 🔴 REPLACE MAP-PREVIEW IMAGE + GOOGLE MAPS LINK WHEN NEEDED 🔴 -->
       <section class="section">
         <div class="bar">IF LOST — LAST CONFIRMED SIGHTING</div>
         <div class="grid-2">
@@ -628,6 +651,8 @@
         </div>
       </section>
 
+      <!-- 🔴🔴🔴 ACTIVE SEARCH / GROUP SECTION 🔴🔴🔴 -->
+      <!-- 🔴 LEAVE EMPTY OR FILL IN IF A SEARCH GROUP IS HELPING 🔴 -->
       <section class="section">
         <div class="bar bar-neutral">ACTIVE SEARCH / GROUP (IF APPLICABLE)</div>
         <div class="panel stack">
@@ -639,6 +664,8 @@
         </div>
       </section>
 
+      <!-- 🔴🔴🔴 BEHAVIOR & HANDLING SECTION 🔴🔴🔴 -->
+      <!-- 🔴 KEEP ROCKEY'S EXACT INFO HERE UNLESS CHANGING PETS 🔴 -->
       <section class="section">
         <div class="bar">BEHAVIOR &amp; HANDLING</div>
         <div class="grid-2">
@@ -702,6 +729,7 @@
         </div>
       </section>
 
+      <!-- 🔴🔴🔴 FOOD / LURE INFORMATION SECTION 🔴🔴🔴 -->
       <section class="section">
         <div class="bar">FOOD / LURE INFORMATION</div>
         <div class="panel grid-2">
@@ -727,6 +755,7 @@
         </div>
       </section>
 
+      <!-- 🔴🔴🔴 IDENTIFICATION DETAILS SECTION 🔴🔴🔴 -->
       <section class="section">
         <div class="bar">IDENTIFICATION DETAILS</div>
         <div class="panel stack">
@@ -739,6 +768,7 @@
         </div>
       </section>
 
+      <!-- 🔴🔴🔴 HOME / REGION SECTION 🔴🔴🔴 -->
       <section class="section">
         <div class="bar bar-neutral">HOME / REGION</div>
         <div class="panel stack">
@@ -747,6 +777,7 @@
         </div>
       </section>
 
+      <!-- 🔴🔴🔴 TRAVEL / CAMPING INFORMATION SECTION 🔴🔴🔴 -->
       <section class="section">
         <div class="bar">TRAVEL / CAMPING INFORMATION</div>
         <div class="panel stack">
@@ -763,6 +794,8 @@
         </div>
       </section>
 
+      <!-- 🔴🔴🔴 VEHICLE & CAMPER IDENTIFICATION SECTION 🔴🔴🔴 -->
+      <!-- 🔴 REPLACE VEHICLE IMAGE FILE NAMES ONLY IF YOUR FILE NAMES CHANGE 🔴 -->
       <section class="section">
         <div class="bar">VEHICLE &amp; CAMPER IDENTIFICATION</div>
         <div class="grid-2">
@@ -798,6 +831,7 @@
         </div>
       </section>
 
+      <!-- 🔴🔴🔴 VETERINARY / MEDICAL SECTION 🔴🔴🔴 -->
       <section class="section">
         <div class="bar">VETERINARY / MEDICAL</div>
         <div class="grid-2">
@@ -814,6 +848,7 @@
         </div>
       </section>
 
+      <!-- 🔴🔴🔴 EMERGENCY CARE CONSENT SECTION 🔴🔴🔴 -->
       <section class="section">
         <div class="bar">EMERGENCY CARE CONSENT</div>
         <div class="panel">
@@ -826,6 +861,7 @@
         </div>
       </section>
 
+      <!-- 🔴🔴🔴 LOST PATTERN SECTION 🔴🔴🔴 -->
       <section class="section">
         <div class="bar">LOST PATTERN (REUSABLE SECTION)</div>
         <div class="panel stack">
@@ -834,6 +870,9 @@
         </div>
       </section>
 
+      <!-- 🔴🔴🔴 SHARE THIS SITE SECTION — ONLY USED WHEN LOST 🔴🔴🔴 -->
+      <!-- 🔴 ADD ACTUAL FACEBOOK SHARE LINK TO BUTTON BELOW WHEN READY 🔴 -->
+      <!-- 🔴 ADD ACTUAL PAGE URL BELOW WHEN READY 🔴 -->
       <section class="section">
         <div class="bar">SHARE THIS SITE (ONLY USED WHEN LOST)</div>
         <div class="panel stack">
@@ -845,6 +884,9 @@
         </div>
       </section>
 
+      <!-- 🔴🔴🔴 FULL CONTACTS LOWER ON PAGE 🔴🔴🔴 -->
+      <!-- 🔴 KEEP MAIN TOP CONTACT AT TOP OF PAGE 🔴 -->
+      <!-- 🔴 USE THIS LOWER SECTION FOR OTHER NUMBERS 🔴 -->
       <section class="section">
         <div class="bar bar-neutral">CONTACTS — CALL / TEXT</div>
         <div class="contacts-grid">
@@ -868,6 +910,7 @@
         <div class="contact-note">Email: mariaalesse@gmail.com</div>
       </section>
 
+      <!-- 🔴🔴🔴 THANK YOU SECTION 🔴🔴🔴 -->
       <section class="section">
         <div class="bar">THANK YOU</div>
         <div class="panel footer-note">
